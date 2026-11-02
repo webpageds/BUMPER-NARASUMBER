@@ -1,49 +1,65 @@
 <!doctype html>
 <html lang="id">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#080b17">
-  <title>Bumper Narasumber</title>
-  <link rel="stylesheet" href="style.css">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#070b16"><title>Bumper Narasumber</title><link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <main class="stage" aria-label="Bumper narasumber">
-    <div class="ambient ambient-a"></div><div class="ambient ambient-b"></div>
-    <div class="grid"></div><div class="scanline"></div>
-    <div class="topline"><span class="live-dot"></span><span>GUEST SPEAKER</span><i></i><span>EXCLUSIVE SESSION</span></div>
+<main class="stage" id="stage">
+  <div class="backdrop-grid"></div><div class="glow glow-left"></div><div class="glow glow-right"></div>
+  <canvas id="particles" aria-hidden="true"></canvas>
+  <div class="vignette"></div><div class="top-bar"><span class="top-mark">✦</span> SPECIAL SESSION <i></i> SPEAKER INTRODUCTION</div>
+  <div class="progress-track"><span id="progress"></span></div>
 
-    <section class="composition">
-      <div class="orbit orbit-one"></div><div class="orbit orbit-two"></div>
-      <div class="light-beam beam-left"></div><div class="light-beam beam-right"></div>
-      <div class="photo-wrap">
-        <div class="photo-halo"></div>
-        <div class="photo-frame">
+  <section class="scene scene-kicker active" data-scene="0">
+    <div class="kicker-orbit"></div><div class="kicker-line"></div>
+    <p class="micro-label">AN EXCLUSIVE MOMENT</p>
+    <h1 class="word-narasumber"><span>N</span><span>A</span><span>R</span><span>A</span><span>S</span><span>U</span><span>M</span><span>B</span><span>E</span><span>R</span></h1>
+    <div class="under-glow"></div><p class="scene-sub">THE VOICE BEHIND THE INSPIRATION</p>
+  </section>
+
+  <section class="scene scene-arrival" data-scene="1">
+    <div class="light-sweep"></div>
+    <p class="micro-label">GET READY</p>
+    <h2>SEBUAH INSPIRASI<br><em>AKAN HADIR</em></h2>
+    <div class="arrival-ring"><span>✦</span></div>
+    <p class="scene-sub">ONE MOMENT. ONE INSPIRATION.</p>
+  </section>
+
+  <section class="scene scene-welcome" data-scene="2">
+    <div class="welcome-rays"></div>
+    <p class="micro-label">WITH GREAT HONOR</p>
+    <h2 class="welcome-title">SELAMAT <b>DATANG</b></h2>
+    <div class="welcome-line"><span></span><i>LET'S GIVE A WARM WELCOME</i><span></span></div>
+    <div class="sparkle s1">✦</div><div class="sparkle s2">✧</div><div class="sparkle s3">✦</div>
+  </section>
+
+  <section class="scene scene-reveal" data-scene="3">
+    <div class="reveal-overline">PLEASE WELCOME</div>
+    <div class="reveal-layout">
+      <div class="photo-column">
+        <div class="photo-aura"></div><div class="photo-ring ring-a"></div><div class="photo-ring ring-b"></div>
+        <div class="photo-card">
           <img id="speaker-photo" src="assets/foto-narasumber.jpg" alt="Foto narasumber">
-          <div class="photo-placeholder" id="photo-placeholder">
-            <span class="placeholder-icon">✦</span>
-            <strong>FOTO NARASUMBER</strong>
-            <small>Upload foto ke folder assets</small>
-          </div>
+          <div class="photo-placeholder" id="photo-placeholder"><span>✦</span><b>FOTO NARASUMBER</b><small>Upload foto ke folder assets</small></div>
+          <div class="photo-glint"></div>
         </div>
-        <span class="corner corner-tl"></span><span class="corner corner-tr"></span>
-        <span class="corner corner-bl"></span><span class="corner corner-br"></span>
+        <i class="photo-corner pc1"></i><i class="photo-corner pc2"></i><i class="photo-corner pc3"></i><i class="photo-corner pc4"></i>
       </div>
-
-      <div class="copy">
-        <p class="eyebrow"><span></span> SPECIAL GUEST</p>
-        <h1>OUR DISTINGUISHED<br><em>SPEAKER</em></h1>
-        <div class="name-rule"><b></b><span>INSPIRING IDEAS · SHAPING FUTURE</span><b></b></div>
-        <p class="speaker-name" id="speaker-name">NAMA NARASUMBER</p>
+      <div class="speaker-copy">
+        <p class="speaker-overline"><span></span> DISTINGUISHED SPEAKER</p>
+        <h2 class="speaker-name" id="speaker-name">NAMA<br>NARASUMBER</h2>
+        <div class="gold-divider"><span></span>✦<span></span></div>
         <p class="speaker-role" id="speaker-role">JABATAN / INSTANSI</p>
+        <p class="speaker-thanks">THANK YOU FOR BEING HERE</p>
       </div>
-    </section>
+    </div>
+    <div class="reveal-bottom"><span>INSPIRING IDEAS</span><b>✦</b><span>SHAPING THE FUTURE</span></div>
+  </section>
 
-    <footer><span>WELCOME TO THE SESSION</span><span class="footer-mark">✦</span><span>READY TO INSPIRE</span></footer>
-    <div class="sound-control"><span class="sound-bars"><i></i><i></i><i></i><i></i></span><span id="sound-label">SOUND OFF</span></div>
-    <audio id="bumper-audio" src="assets/bumper-sound.mp3" preload="auto" loop></audio>
-    <button class="audio-toggle" id="audio-toggle" aria-label="Aktifkan suara">♫</button>
-  </main>
-  <script src="script.js"></script>
-</body>
-</html>
+  <div class="sound-ui"><span class="equalizer"><i></i><i></i><i></i><i></i></span><span id="sound-label">SOUND OFF</span></div>
+  <button id="audio-toggle" class="audio-toggle" aria-label="Aktifkan suara">♫</button>
+  <audio id="bumper-audio" src="assets/bumper-sound.mp3" preload="auto" loop></audio>
+</main>
+<script src="script.js"></script>
+</body></html>
