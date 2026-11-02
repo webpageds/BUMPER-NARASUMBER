@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#080b17">
+  <title>Bumper Narasumber</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="stage" aria-label="Bumper narasumber">
+    <div class="ambient ambient-a"></div><div class="ambient ambient-b"></div>
+    <div class="grid"></div><div class="scanline"></div>
+    <div class="topline"><span class="live-dot"></span><span>GUEST SPEAKER</span><i></i><span>EXCLUSIVE SESSION</span></div>
+
+    <section class="composition">
+      <div class="orbit orbit-one"></div><div class="orbit orbit-two"></div>
+      <div class="light-beam beam-left"></div><div class="light-beam beam-right"></div>
+      <div class="photo-wrap">
+        <div class="photo-halo"></div>
+        <div class="photo-frame">
+          <img id="speaker-photo" src="assets/foto-narasumber.jpg" alt="Foto narasumber">
+          <div class="photo-placeholder" id="photo-placeholder">
+            <span class="placeholder-icon">✦</span>
+            <strong>FOTO NARASUMBER</strong>
+            <small>Upload foto ke folder assets</small>
+          </div>
+        </div>
+        <span class="corner corner-tl"></span><span class="corner corner-tr"></span>
+        <span class="corner corner-bl"></span><span class="corner corner-br"></span>
+      </div>
+
+      <div class="copy">
+        <p class="eyebrow"><span></span> SPECIAL GUEST</p>
+        <h1>OUR DISTINGUISHED<br><em>SPEAKER</em></h1>
+        <div class="name-rule"><b></b><span>INSPIRING IDEAS · SHAPING FUTURE</span><b></b></div>
+        <p class="speaker-name" id="speaker-name">NAMA NARASUMBER</p>
+        <p class="speaker-role" id="speaker-role">JABATAN / INSTANSI</p>
+      </div>
+    </section>
+
+    <footer><span>WELCOME TO THE SESSION</span><span class="footer-mark">✦</span><span>READY TO INSPIRE</span></footer>
+    <div class="sound-control"><span class="sound-bars"><i></i><i></i><i></i><i></i></span><span id="sound-label">SOUND OFF</span></div>
+    <audio id="bumper-audio" src="assets/bumper-sound.mp3" preload="auto" loop></audio>
+    <button class="audio-toggle" id="audio-toggle" aria-label="Aktifkan suara">♫</button>
+  </main>
+  <script src="script.js"></script>
+</body>
+</html>
