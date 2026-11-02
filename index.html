@@ -2,63 +2,90 @@
 <html lang="id">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#070b16"><title>Bumper Narasumber</title><link rel="stylesheet" href="style.css">
+<meta name="theme-color" content="#070b16"><title>Speaker Bumper Preview</title><link rel="stylesheet" href="style.css">
 </head>
 <body>
 <main class="stage" id="stage">
   <div class="backdrop-grid"></div><div class="glow glow-left"></div><div class="glow glow-right"></div>
   <canvas id="particles" aria-hidden="true"></canvas>
-  <div class="vignette"></div><div class="top-bar"><span class="top-mark">✦</span> SPECIAL SESSION <i></i> SPEAKER INTRODUCTION</div>
-  <div class="progress-track"><span id="progress"></span></div>
+  <div class="vignette"></div>
 
-  <section class="scene scene-kicker active" data-scene="0">
-    <div class="kicker-orbit"></div><div class="kicker-line"></div>
-    <p class="micro-label">AN EXCLUSIVE MOMENT</p>
-    <h1 class="word-narasumber"><span>N</span><span>A</span><span>R</span><span>A</span><span>S</span><span>U</span><span>M</span><span>B</span><span>E</span><span>R</span></h1>
-    <div class="under-glow"></div><p class="scene-sub">THE VOICE BEHIND THE INSPIRATION</p>
-  </section>
+  <header class="top-bar"><span class="top-mark">✦</span> SPECIAL SESSION <i></i> SPEAKER INTRODUCTION</header>
 
-  <section class="scene scene-arrival" data-scene="1">
-    <div class="light-sweep"></div>
-    <p class="micro-label">GET READY</p>
-    <h2>SEBUAH INSPIRASI<br><em>AKAN HADIR</em></h2>
-    <div class="arrival-ring"><span>✦</span></div>
-    <p class="scene-sub">ONE MOMENT. ONE INSPIRATION.</p>
-  </section>
-
-  <section class="scene scene-welcome" data-scene="2">
-    <div class="welcome-rays"></div>
-    <p class="micro-label">WITH GREAT HONOR</p>
-    <h2 class="welcome-title">SELAMAT <b>DATANG</b></h2>
-    <div class="welcome-line"><span></span><i>LET'S GIVE A WARM WELCOME</i><span></span></div>
-    <div class="sparkle s1">✦</div><div class="sparkle s2">✧</div><div class="sparkle s3">✦</div>
-  </section>
-
-  <section class="scene scene-reveal" data-scene="3">
-    <div class="reveal-overline">PLEASE WELCOME</div>
-    <div class="reveal-layout">
-      <div class="photo-column">
-        <div class="photo-aura"></div><div class="photo-ring ring-a"></div><div class="photo-ring ring-b"></div>
-        <div class="photo-card">
-          <img id="speaker-photo" src="fotonarsum.png" alt="Foto narasumber">
-          <div class="photo-placeholder" id="photo-placeholder"><span>✦</span><b>FOTO NARASUMBER</b><small>Upload foto ke folder assets</small></div>
-          <div class="photo-glint"></div>
-        </div>
-        <i class="photo-corner pc1"></i><i class="photo-corner pc2"></i><i class="photo-corner pc3"></i><i class="photo-corner pc4"></i>
-      </div>
-      <div class="speaker-copy">
-        <p class="speaker-overline"><span></span> DISTINGUISHED SPEAKER</p>
-        <h2 class="speaker-name" id="speaker-name">Dr. Riyan Harbi<br>Valdiansyah</h2>
-        <div class="gold-divider"><span></span>✦<span></span></div>
-        <p class="speaker-role" id="speaker-role">S.E., M.Ak, Cert DA<br>CEO &amp; Founder — Fast Consulting</p>
-        <p class="speaker-thanks">THANK YOU FOR BEING HERE</p>
-      </div>
+  <section class="selector-screen active" id="selector-screen">
+    <p class="selector-eyebrow">WELCOME TO THE SPEAKER EXPERIENCE</p>
+    <h1 class="selector-heading">PILIH <em>NARASUMBER</em></h1>
+    <p class="selector-description">Pilih preview untuk menampilkan bumper narasumber.</p>
+    <div class="speaker-options">
+      <button class="speaker-option" type="button" data-speaker="0">
+        <span class="option-index">01 / SPEAKER</span>
+        <span class="option-photo"><img src="fotonarsum.png" alt="Foto Dr. Riyan Harbi Valdiansyah"></span>
+        <span class="option-copy"><strong>Narasumber 1</strong><small>Dr. Riyan Harbi Valdiansyah</small><small>CEO &amp; Founder — Fast Consulting</small></span>
+        <span class="option-cta">LIHAT PREVIEW <b>↗</b></span>
+      </button>
+      <button class="speaker-option" type="button" data-speaker="1">
+        <span class="option-index">02 / SPEAKER</span>
+        <span class="option-photo"><img src="narsum2.png" alt="Foto Irfan Sulaiman Suhaeri"></span>
+        <span class="option-copy"><strong>Narasumber 2</strong><small>Irfan Sulaiman Suhaeri</small><small>Associate Director — KPMG Siddharta Advisory Indonesia</small></span>
+        <span class="option-cta">LIHAT PREVIEW <b>↗</b></span>
+      </button>
     </div>
-    <div class="reveal-bottom"><span>INSPIRING IDEAS</span><b>✦</b><span>SHAPING THE FUTURE</span></div>
+    <p class="selector-footnote">SELECT A SPEAKER TO PLAY THE CINEMATIC INTRODUCTION</p>
   </section>
 
-  <div class="sound-ui"><span class="equalizer"><i></i><i></i><i></i><i></i></span><span id="sound-label">SOUND OFF</span></div>
-  <button id="audio-toggle" class="audio-toggle" aria-label="Aktifkan suara">♫</button>
+  <section class="bumper-screen" id="bumper-screen" aria-hidden="true">
+    <button class="back-button" id="back-button" type="button">← <span>KEMBALI KE PREVIEW</span></button>
+    <div class="progress-track"><span id="progress"></span></div>
+
+    <section class="scene scene-kicker active" data-scene="0">
+      <div class="kicker-orbit"></div><div class="kicker-line"></div>
+      <p class="micro-label">AN EXCLUSIVE MOMENT</p>
+      <h1 class="word-narasumber"><span>N</span><span>A</span><span>R</span><span>A</span><span>S</span><span>U</span><span>M</span><span>B</span><span>E</span><span>R</span></h1>
+      <div class="under-glow"></div><p class="scene-sub">THE VOICE BEHIND THE INSPIRATION</p>
+    </section>
+
+    <section class="scene scene-arrival" data-scene="1">
+      <div class="light-sweep"></div>
+      <p class="micro-label">GET READY</p>
+      <h2>SEBUAH INSPIRASI<br><em>AKAN HADIR</em></h2>
+      <div class="arrival-ring"><span>✦</span></div>
+      <p class="scene-sub">ONE MOMENT. ONE INSPIRATION.</p>
+    </section>
+
+    <section class="scene scene-welcome" data-scene="2">
+      <div class="welcome-rays"></div>
+      <p class="micro-label">WITH GREAT HONOR</p>
+      <h2 class="welcome-title">SELAMAT <b>DATANG</b></h2>
+      <div class="welcome-line"><span></span><i>LET'S GIVE A WARM WELCOME</i><span></span></div>
+      <div class="sparkle s1">✦</div><div class="sparkle s2">✧</div><div class="sparkle s3">✦</div>
+    </section>
+
+    <section class="scene scene-reveal" data-scene="3">
+      <div class="reveal-overline">PLEASE WELCOME</div>
+      <div class="reveal-layout">
+        <div class="photo-column">
+          <div class="photo-aura"></div><div class="photo-ring ring-a"></div><div class="photo-ring ring-b"></div>
+          <div class="photo-card">
+            <img id="speaker-photo" src="fotonarsum.png" alt="Foto narasumber">
+            <div class="photo-placeholder" id="photo-placeholder"><span>✦</span><b>FOTO NARASUMBER</b><small>Foto belum tersedia</small></div>
+            <div class="photo-glint"></div>
+          </div>
+          <i class="photo-corner pc1"></i><i class="photo-corner pc2"></i><i class="photo-corner pc3"></i><i class="photo-corner pc4"></i>
+        </div>
+        <div class="speaker-copy">
+          <p class="speaker-overline"><span></span> DISTINGUISHED SPEAKER</p>
+          <h2 class="speaker-name" id="speaker-name"></h2>
+          <div class="gold-divider"><span></span>✦<span></span></div>
+          <p class="speaker-role" id="speaker-role"></p>
+          <p class="speaker-thanks">THANK YOU FOR BEING HERE</p>
+        </div>
+      </div>
+      <div class="reveal-bottom"><span>INSPIRING IDEAS</span><b>✦</b><span>SHAPING THE FUTURE</span></div>
+    </section>
+
+    <div class="sound-ui"><span class="equalizer"><i></i><i></i><i></i><i></i></span><span id="sound-label">SOUND OFF</span></div>
+    <button id="audio-toggle" class="audio-toggle" type="button" aria-label="Aktifkan suara">♫</button>
+  </section>
   <audio id="bumper-audio" src="bumper%20sound.mp3" preload="auto" loop></audio>
 </main>
 <script src="script.js"></script>
