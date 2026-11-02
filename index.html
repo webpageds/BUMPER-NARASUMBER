@@ -2,64 +2,91 @@
 <html lang="id">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#070b16"><title>Speaker Bumper Preview</title><link rel="stylesheet" href="style.css">
+<meta name="theme-color" content="#070b16"><title>Speaker Bumper Studio</title><link rel="stylesheet" href="style.css">
 </head>
 <body>
 <main class="stage" id="stage">
   <div class="backdrop-grid"></div><div class="glow glow-left"></div><div class="glow glow-right"></div>
-  <canvas id="particles" aria-hidden="true"></canvas>
-  <div class="vignette"></div>
+  <canvas id="particles" aria-hidden="true"></canvas><div class="vignette"></div>
 
-  <header class="top-bar"><span class="top-mark">✦</span> SPECIAL SESSION <i></i> SPEAKER INTRODUCTION</header>
+  <header class="top-bar"><span class="top-mark">✦</span> SPEAKER BUMPER STUDIO <i></i> PREVIEW EXPERIENCE</header>
 
   <section class="selector-screen active" id="selector-screen">
-    <p class="selector-eyebrow">WELCOME TO THE SPEAKER EXPERIENCE</p>
-    <h1 class="selector-heading">PILIH <em>NARASUMBER</em></h1>
-    <p class="selector-description">Pilih preview untuk menampilkan bumper narasumber.</p>
+    <div class="app-brand"><span>✦</span> CINEMATIC INTRODUCTION TOOL</div>
+    <h1 class="selector-heading">SPEAKER <em>STUDIO</em></h1>
+    <p class="selector-description">Pilih narasumber untuk melihat preview bumper atau buat bumper custom sendiri.</p>
+
     <div class="speaker-options">
       <button class="speaker-option" type="button" data-speaker="0">
-        <span class="option-index">01 / SPEAKER</span>
+        <span class="option-index">01 / READY TO PLAY</span>
         <span class="option-photo"><img src="fotonarsum.png" alt="Foto Dr. Riyan Harbi Valdiansyah"></span>
-        <span class="option-copy"><strong>Narasumber 1</strong><small>Dr. Riyan Harbi Valdiansyah</small><small>CEO &amp; Founder — Fast Consulting</small></span>
-        <span class="option-cta">LIHAT PREVIEW <b>↗</b></span>
+        <span class="option-copy"><strong>Narasumber 1</strong><small>Dr. Riyan Harbi Valdiansyah</small><small>CEO &amp; Founder · Fast Consulting</small></span>
+        <span class="option-cta">PLAY PREVIEW <b>↗</b></span>
       </button>
       <button class="speaker-option" type="button" data-speaker="1">
-        <span class="option-index">02 / SPEAKER</span>
+        <span class="option-index">02 / READY TO PLAY</span>
         <span class="option-photo"><img src="narsum2.png" alt="Foto Irfan Sulaiman Suhaeri"></span>
-        <span class="option-copy"><strong>Narasumber 2</strong><small>Irfan Sulaiman Suhaeri</small><small>Associate Director — KPMG Siddharta Advisory Indonesia</small></span>
-        <span class="option-cta">LIHAT PREVIEW <b>↗</b></span>
+        <span class="option-copy"><strong>Narasumber 2</strong><small>Irfan Sulaiman Suhaeri</small><small>Associate Director · KPMG Siddharta Advisory Indonesia</small></span>
+        <span class="option-cta">PLAY PREVIEW <b>↗</b></span>
+      </button>
+      <button class="speaker-option custom-option" type="button" id="open-custom">
+        <span class="option-index">03 / BUILD YOUR OWN</span>
+        <span class="custom-symbol">＋</span>
+        <span class="option-copy"><strong>Custom Narasumber</strong><small>Upload foto dan masukkan identitas narasumber sesuai kebutuhan.</small><small>Gunakan animasi dan sound bumper yang sama.</small></span>
+        <span class="option-cta">BUAT CUSTOM <b>↗</b></span>
       </button>
     </div>
-    <p class="selector-footnote">SELECT A SPEAKER TO PLAY THE CINEMATIC INTRODUCTION</p>
+    <p class="selector-footnote">SELECT A SPEAKER · PREVIEW THE ANIMATION · PLAY THE SOUND</p>
+  </section>
+
+  <section class="custom-screen" id="custom-screen" aria-hidden="true">
+    <button class="back-button custom-back" id="custom-back" type="button">← <span>KEMBALI KE MENU</span></button>
+    <div class="custom-panel">
+      <div class="app-brand">✦ CUSTOM SPEAKER SETUP</div>
+      <h2>BUAT BUMPER <em>ANDA</em></h2>
+      <p class="custom-intro">Lengkapi identitas narasumber. Data akan digunakan untuk membuat preview animasi.</p>
+      <form id="custom-form">
+        <label class="upload-field" for="custom-photo">
+          <span class="upload-preview" id="upload-preview"><span>＋</span><small>UPLOAD FOTO</small></span>
+          <span class="upload-copy"><strong>Foto narasumber</strong><small>Format JPG, PNG, atau WebP. Foto akan tampil pada scene terakhir.</small><b>PILIH FOTO</b></span>
+        </label>
+        <input id="custom-photo" type="file" accept="image/png,image/jpeg,image/webp" required>
+        <div class="custom-fields">
+          <label>Nama lengkap<input id="custom-name" type="text" maxlength="100" placeholder="Contoh: Dr. Nama Lengkap" required></label>
+          <label>Gelar / kualifikasi<input id="custom-title" type="text" maxlength="160" placeholder="Contoh: S.E., M.Ak., Ph.D."></label>
+          <label>Jabatan<input id="custom-position" type="text" maxlength="120" placeholder="Contoh: Chief Executive Officer" required></label>
+          <label>Instansi / perusahaan<input id="custom-company" type="text" maxlength="140" placeholder="Contoh: Nama Perusahaan" required></label>
+        </div>
+        <div class="custom-actions">
+          <button class="secondary-action" type="button" id="cancel-custom">BATAL</button>
+          <button class="primary-action" type="submit">PREVIEW BUMPER <span>↗</span></button>
+        </div>
+      </form>
+      <p class="custom-note">Data custom diproses di browser ini saja dan tidak diunggah ke GitHub.</p>
+    </div>
   </section>
 
   <section class="bumper-screen" id="bumper-screen" aria-hidden="true">
-    <button class="back-button" id="back-button" type="button">← <span>KEMBALI KE PREVIEW</span></button>
+    <button class="back-button" id="back-button" type="button">← <span>KEMBALI KE MENU</span></button>
     <div class="progress-track"><span id="progress"></span></div>
 
-    <section class="scene scene-kicker active" data-scene="0">
+    <section class="scene scene-kicker" data-scene="0">
       <div class="kicker-orbit"></div><div class="kicker-line"></div>
       <p class="micro-label">AN EXCLUSIVE MOMENT</p>
       <h1 class="word-narasumber"><span>N</span><span>A</span><span>R</span><span>A</span><span>S</span><span>U</span><span>M</span><span>B</span><span>E</span><span>R</span></h1>
       <div class="under-glow"></div><p class="scene-sub">THE VOICE BEHIND THE INSPIRATION</p>
     </section>
-
     <section class="scene scene-arrival" data-scene="1">
-      <div class="light-sweep"></div>
-      <p class="micro-label">GET READY</p>
+      <div class="light-sweep"></div><p class="micro-label">GET READY</p>
       <h2>SEBUAH INSPIRASI<br><em>AKAN HADIR</em></h2>
-      <div class="arrival-ring"><span>✦</span></div>
-      <p class="scene-sub">ONE MOMENT. ONE INSPIRATION.</p>
+      <div class="arrival-ring"><span>✦</span></div><p class="scene-sub">ONE MOMENT. ONE INSPIRATION.</p>
     </section>
-
     <section class="scene scene-welcome" data-scene="2">
-      <div class="welcome-rays"></div>
-      <p class="micro-label">WITH GREAT HONOR</p>
+      <div class="welcome-rays"></div><p class="micro-label">WITH GREAT HONOR</p>
       <h2 class="welcome-title">SELAMAT <b>DATANG</b></h2>
       <div class="welcome-line"><span></span><i>LET'S GIVE A WARM WELCOME</i><span></span></div>
       <div class="sparkle s1">✦</div><div class="sparkle s2">✧</div><div class="sparkle s3">✦</div>
     </section>
-
     <section class="scene scene-reveal" data-scene="3">
       <div class="reveal-overline">PLEASE WELCOME</div>
       <div class="reveal-layout">
@@ -82,10 +109,10 @@
       </div>
       <div class="reveal-bottom"><span>INSPIRING IDEAS</span><b>✦</b><span>SHAPING THE FUTURE</span></div>
     </section>
-
     <div class="sound-ui"><span class="equalizer"><i></i><i></i><i></i><i></i></span><span id="sound-label">SOUND OFF</span></div>
     <button id="audio-toggle" class="audio-toggle" type="button" aria-label="Aktifkan suara">♫</button>
   </section>
+
   <audio id="bumper-audio" src="bumper%20sound.mp3" preload="auto" loop></audio>
 </main>
 <script src="script.js"></script>
