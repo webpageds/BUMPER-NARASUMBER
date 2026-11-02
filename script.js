@@ -7,10 +7,13 @@ const audioButton=document.getElementById('audio-toggle');
 const soundLabel=document.getElementById('sound-label');
 const soundUi=document.querySelector('.sound-ui');
 const selector=document.getElementById('selector-screen');
+const customScreen=document.getElementById('custom-screen');
 const bumperScreen=document.getElementById('bumper-screen');
-const backButton=document.getElementById('back-button');
 const speakerName=document.getElementById('speaker-name');
 const speakerRole=document.getElementById('speaker-role');
+const customForm=document.getElementById('custom-form');
+const customPhotoInput=document.getElementById('custom-photo');
+const uploadPreview=document.getElementById('upload-preview');
 
 const speakers=[
   {
@@ -29,10 +32,7 @@ const speakers=[
 
 const durations=[3600,3400,3400,8500];
 const cycleLength=durations.reduce((sum,value)=>sum+value,0);
-let cycleStart=0;
-let activeIndex=-1;
-let rafId=0;
-let currentSpeaker=null;
+let cycleStart=0,activeIndex=-1,rafId=0,currentObjectUrl=null,customPhotoData=null;
 
 function showScene(index){
   if(index===activeIndex)return;
@@ -58,6 +58,8 @@ function startBumper(){
   cancelAnimationFrame(rafId);
   cycleStart=performance.now();
   activeIndex=-1;
+  progress.style.width='0%';
+  showScene(0);
   rafId=requestAnimationFrame(animate);
 }
 function setSoundState(isPlaying){
@@ -68,7 +70,7 @@ function setSoundState(isPlaying){
 function setPhoto(src,alt){
   photo.style.display='none';
   placeholder.style.display='flex';
-  photo.alt=alt;
+  photo.alt=alt||'Foto narasumber';
   photo.onload=()=>{photo.style.display='block';placeholder.style.display='none';};
   photo.onerror=()=>{photo.style.display='none';placeholder.style.display='flex';};
   photo.src=src;
@@ -83,34 +85,93 @@ async function tryAutoplay(){
     soundLabel.textContent='KLIK ♫ UNTUK SOUND';
   }
 }
-function openSpeaker(index){
-  const speaker=speakers[index];
+function switchPanel(panel){
+  [selector,customScreen,bumperScreen].forEach(el=>{
+    el.classList.remove('active');
+    el.setAttribute('aria-hidden','true');
+  });
+  panel.classList.add('active');
+  panel.setAttribute('aria-hidden','false');
+}
+function openSpeaker(speaker){
   if(!speaker)return;
-  currentSpeaker=index;
   speakerName.innerHTML=speaker.name;
   speakerRole.innerHTML=speaker.role;
   setPhoto(speaker.photo,speaker.alt);
-  selector.classList.remove('active');
-  bumperScreen.classList.add('active');
-  bumperScreen.setAttribute('aria-hidden','false');
-  progress.style.width='0%';
+  switchPanel(bumperScreen);
   startBumper();
   tryAutoplay();
 }
-function returnToSelector(){
+function returnToMenu(){
   cancelAnimationFrame(rafId);
   audio.pause();
   audio.currentTime=0;
   setSoundState(false);
-  bumperScreen.classList.remove('active');
-  bumperScreen.setAttribute('aria-hidden','true');
-  selector.classList.add('active');
-  currentSpeaker=null;
+  switchPanel(selector);
 }
+function escapeHtml(value){
+  return String(value).replace(/[&<>"']/g,char=>({
+    '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'
+  }[char]));
+}
+function makeCustomSpeaker(){
+  const name=document.getElementById('custom-name').value.trim();
+  const title=document.getElementById('custom-title').value.trim();
+  const position=document.getElementById('custom-position').value.trim();
+  const company=document.getElementById('custom-company').value.trim();
+  if(!name||!position||!company||!customPhotoData)return null;
+  const safeName=escapeHtml(name);
+  const safeTitle=escapeHtml(title);
+  const safePosition=escapeHtml(position);
+  const safeCompany=escapeHtml(company);
+  return {
+    name:safeName,
+    role:[safeTitle,safePosition+' — '+safeCompany].filter(Boolean).join('<br>'),
+    photo:customPhotoData,
+    alt:'Foto '+name
+  };
+}
+
 document.querySelectorAll('[data-speaker]').forEach(button=>{
-  button.addEventListener('click',()=>openSpeaker(Number(button.dataset.speaker)));
+  button.addEventListener('click',()=>openSpeaker(speakers[Number(button.dataset.speaker)]));
 });
-backButton.addEventListener('click',returnToSelector);
+document.getElementById('back-button').addEventListener('click',returnToMenu);
+document.getElementById('open-custom').addEventListener('click',()=>switchPanel(customScreen));
+document.getElementById('custom-back').addEventListener('click',()=>switchPanel(selector));
+document.getElementById('cancel-custom').addEventListener('click',()=>switchPanel(selector));
+
+customPhotoInput.addEventListener('change',()=>{
+  const file=customPhotoInput.files&&customPhotoInput.files[0];
+  customPhotoData=null;
+  if(!file){uploadPreview.innerHTML='<span>＋</span><small>UPLOAD FOTO</small>';return;}
+  if(!['image/jpeg','image/png','image/webp'].includes(file.type)){
+    customPhotoInput.value='';
+    alert('Gunakan foto dengan format JPG, PNG, atau WebP.');
+    return;
+  }
+  if(file.size>8*1024*1024){
+    customPhotoInput.value='';
+    alert('Ukuran foto maksimal 8 MB.');
+    return;
+  }
+  const reader=new FileReader();
+  reader.onload=()=>{
+    customPhotoData=reader.result;
+    uploadPreview.innerHTML='<img src="'+reader.result+'" alt="Preview foto custom"><small>FOTO SIAP DIGUNAKAN</small>';
+  };
+  reader.onerror=()=>alert('Foto gagal dibaca. Silakan pilih ulang.');
+  reader.readAsDataURL(file);
+});
+customForm.addEventListener('submit',event=>{
+  event.preventDefault();
+  const speaker=makeCustomSpeaker();
+  if(!speaker){
+    alert('Lengkapi nama, jabatan, instansi, dan upload foto terlebih dahulu.');
+    return;
+  }
+  openSpeaker(speaker);
+});
+
 audio.addEventListener('play',()=>setSoundState(true));
 audio.addEventListener('pause',()=>setSoundState(false));
 audio.addEventListener('error',()=>{
@@ -124,7 +185,7 @@ audioButton.addEventListener('click',async()=>{
   }catch(error){soundLabel.textContent='AUDIO GAGAL DIPUTAR';}
 });
 
-// Gold dust particles behind both the selector and bumper scenes.
+// Animated gold dust in the background.
 const canvas=document.getElementById('particles');
 const ctx=canvas.getContext('2d');
 let width=0,height=0,dpr=1,particles=[];
@@ -144,7 +205,8 @@ function resizeCanvas(){
 function drawParticles(time){
   ctx.clearRect(0,0,width,height);
   for(const p of particles){
-    p.y-=p.speed;p.x+=p.drift+Math.sin(time*.00045+p.phase)*.12;
+    p.y-=p.speed;
+    p.x+=p.drift+Math.sin(time*.00045+p.phase)*.12;
     if(p.y<-5){p.y=height+5;p.x=Math.random()*width;}
     if(p.x<-5)p.x=width+5;
     if(p.x>width+5)p.x=-5;
