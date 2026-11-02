@@ -11,6 +11,8 @@ const customScreen=document.getElementById('custom-screen');
 const bumperScreen=document.getElementById('bumper-screen');
 const speakerName=document.getElementById('speaker-name');
 const speakerRole=document.getElementById('speaker-role');
+const combinedLayout=document.getElementById('combined-layout');
+const singleLayout=document.getElementById('single-layout');
 const customForm=document.getElementById('custom-form');
 const customPhotoInput=document.getElementById('custom-photo');
 const uploadPreview=document.getElementById('upload-preview');
@@ -95,9 +97,18 @@ function switchPanel(panel){
 }
 function openSpeaker(speaker){
   if(!speaker)return;
+  combinedLayout.style.display='none';
+  singleLayout.style.display='flex';
   speakerName.innerHTML=speaker.name;
   speakerRole.innerHTML=speaker.role;
   setPhoto(speaker.photo,speaker.alt);
+  switchPanel(bumperScreen);
+  startBumper();
+  tryAutoplay();
+}
+function openCombined(){
+  singleLayout.style.display='none';
+  combinedLayout.style.display='grid';
   switchPanel(bumperScreen);
   startBumper();
   tryAutoplay();
@@ -136,6 +147,7 @@ document.querySelectorAll('[data-speaker]').forEach(button=>{
   button.addEventListener('click',()=>openSpeaker(speakers[Number(button.dataset.speaker)]));
 });
 document.getElementById('back-button').addEventListener('click',returnToMenu);
+document.getElementById('play-combined').addEventListener('click',openCombined);
 document.getElementById('open-custom').addEventListener('click',()=>switchPanel(customScreen));
 document.getElementById('custom-back').addEventListener('click',()=>switchPanel(selector));
 document.getElementById('cancel-custom').addEventListener('click',()=>switchPanel(selector));
