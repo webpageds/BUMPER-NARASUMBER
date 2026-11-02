@@ -46,20 +46,42 @@ function startBumper(){
 photo.addEventListener('load',()=>{photo.style.display='block';placeholder.style.display='none';});
 photo.addEventListener('error',()=>{photo.style.display='none';placeholder.style.display='flex';});
 
+function setSoundState(isPlaying){
+  audioButton.setAttribute('aria-label', isPlaying ? 'Matikan suara' : 'Aktifkan suara');
+  soundLabel.textContent = isPlaying ? 'SOUND ON' : 'SOUND OFF';
+  soundUi.classList.toggle('playing', isPlaying);
+}
+audio.addEventListener('play',()=>setSoundState(true));
+audio.addEventListener('pause',()=>setSoundState(false));
+audio.addEventListener('error',()=>{
+  soundLabel.textContent='AUDIO TIDAK DAPAT DIMUAT';
+  soundUi.classList.remove('playing');
+});
+
+// Try sound on page open. Browsers may block audible autoplay until user interacts.
+async function tryAutoplay(){
+  try{
+    audio.volume = 1;
+    await audio.play();
+    setSoundState(true);
+  }catch(error){
+    setSoundState(false);
+    soundLabel.textContent='KLIK ♫ UNTUK SOUND';
+  }
+}
+
 audioButton.addEventListener('click',async()=>{
   try{
     if(audio.paused){
       await audio.play();
-      audioButton.setAttribute('aria-label','Matikan suara');
-      soundLabel.textContent='SOUND ON';
-      soundUi.classList.add('playing');
+      setSoundState(true);
     }else{
       audio.pause();
-      audioButton.setAttribute('aria-label','Aktifkan suara');
-      soundLabel.textContent='SOUND OFF';
-      soundUi.classList.remove('playing');
+      setSoundState(false);
     }
-  }catch(error){soundLabel.textContent='SOUND BELUM TERSEDIA';}
+  }catch(error){
+    soundLabel.textContent='AUDIO GAGAL DIPUTAR';
+  }
 });
 
 // Canvas particles: slow drifting gold dust and occasional shooting sparks.
@@ -96,4 +118,5 @@ function drawParticles(time){
 window.addEventListener('resize',resizeCanvas);
 resizeCanvas();requestAnimationFrame(drawParticles);
 startBumper();
+tryAutoplay();
 document.addEventListener('visibilitychange',()=>{if(!document.hidden)startBumper();else cancelAnimationFrame(rafId);});
