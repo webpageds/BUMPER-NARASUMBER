@@ -160,20 +160,20 @@ function openAward(speaker){
   combinedLayout.style.display='none';
   singleLayout.style.display='none';
 
-  // Set the three award lines and launch the dedicated award scene only.
+  // Special award flow only; the regular speaker welcome/reveal flow remains untouched.
   awardOverline.textContent='SELAMAT';
   awardTitle.innerHTML='KEPADA PESERTA<br>WEBINAR';
   awardSubtitle.textContent=speaker.awardSubtitle;
 
   switchPanel(bumperScreen);
   cancelAnimationFrame(rafId);
-  activeIndex=-1;
   scenes.forEach(scene=>scene.classList.remove('active'));
   const awardScene=document.querySelector('.scene-award');
   if(awardScene){
     void awardScene.offsetWidth;
     awardScene.classList.add('active');
   }
+  activeIndex=-1;
   progress.style.width='100%';
   tryAutoplay();
 }
