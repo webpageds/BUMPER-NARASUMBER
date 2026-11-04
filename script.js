@@ -11,6 +11,7 @@ const customScreen=document.getElementById('custom-screen');
 const bumperScreen=document.getElementById('bumper-screen');
 const certificateViewer=document.getElementById('certificate-viewer');
 const certificateArt=document.getElementById('certificate-art');
+const certificateSpeakerPhoto=document.getElementById('certificate-speaker-photo');
 const certificateSoundLabel=document.getElementById('viewer-sound-label');
 const certificateAudioButton=document.getElementById('cert-audio-toggle');
 const speakerName=document.getElementById('speaker-name');
@@ -40,7 +41,9 @@ const speakers=[
     photo:'narsumriyan.png',
     alt:'Sertifikat narasumber Dr. Riyan Harbi Valdiansyah',
     certificate:true,
-    certificateAlt:'Sertifikat narasumber Dr. Riyan Harbi Valdiansyah'
+    certificateAlt:'Sertifikat narasumber Dr. Riyan Harbi Valdiansyah',
+    certificatePhoto:'fotonarsum.png',
+    certificatePhotoAlt:'Foto Dr. Riyan Harbi Valdiansyah'
   },
   {
     name:'Sertifikat Narasumber',
@@ -48,7 +51,9 @@ const speakers=[
     photo:'narsumirfan.png',
     alt:'Sertifikat narasumber Irfan Sulaiman Suhaeri',
     certificate:true,
-    certificateAlt:'Sertifikat narasumber Irfan Sulaiman Suhaeri'
+    certificateAlt:'Sertifikat narasumber Irfan Sulaiman Suhaeri',
+    certificatePhoto:'narsum2.png',
+    certificatePhotoAlt:'Foto Irfan Sulaiman Suhaeri'
   }
 ];
 
@@ -135,6 +140,8 @@ function openCertificate(speaker){
   audio.volume=1;
   certificateArt.src=speaker.photo;
   certificateArt.alt=speaker.certificateAlt||'Sertifikat narasumber';
+  certificateSpeakerPhoto.src=speaker.certificatePhoto;
+  certificateSpeakerPhoto.alt=speaker.certificatePhotoAlt||'Foto narasumber';
   switchPanel(certificateViewer);
   tryAutoplay().then(()=>syncCertificateSound());
 }
