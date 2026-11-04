@@ -16,6 +16,9 @@ const certificateSoundLabel=document.getElementById('viewer-sound-label');
 const certificateAudioButton=document.getElementById('cert-audio-toggle');
 const speakerName=document.getElementById('speaker-name');
 const speakerRole=document.getElementById('speaker-role');
+const awardOverline=document.getElementById('award-overline');
+const awardTitle=document.getElementById('award-title');
+const awardSubtitle=document.getElementById('award-subtitle');
 const combinedLayout=document.getElementById('combined-layout');
 const singleLayout=document.getElementById('single-layout');
 const customForm=document.getElementById('custom-form');
@@ -54,6 +57,20 @@ const speakers=[
     certificateAlt:'Sertifikat narasumber Irfan Sulaiman Suhaeri',
     certificatePhoto:'narsum2.png',
     certificatePhotoAlt:'Foto Irfan Sulaiman Suhaeri'
+  },
+  {
+    award:true,
+    awardType:'question',
+    awardTitle:'TERAKTIF <b>BERTANYA</b>',
+    awardOverline:'PENGHARGAAN PESERTA WEBINAR',
+    awardSubtitle:'PESERTA TERAKTIF DALAM MENGAJUKAN PERTANYAAN'
+  },
+  {
+    award:true,
+    awardType:'answer',
+    awardTitle:'TERAKTIF <b>MENJAWAB</b>',
+    awardOverline:'PENGHARGAAN PESERTA WEBINAR',
+    awardSubtitle:'PESERTA TERAKTIF DALAM MENJAWAB PERTANYAAN'
   }
 ];
 
@@ -122,6 +139,10 @@ function switchPanel(panel){
 }
 function openSpeaker(speaker){
   if(!speaker)return;
+  if(speaker.award){
+    openAward(speaker);
+    return;
+  }
   if(speaker.certificate){
     openCertificate(speaker);
     return;
@@ -131,6 +152,16 @@ function openSpeaker(speaker){
   speakerName.innerHTML=speaker.name;
   speakerRole.innerHTML=speaker.role;
   setPhoto(speaker.photo,speaker.alt);
+  switchPanel(bumperScreen);
+  startBumper();
+  tryAutoplay();
+}
+function openAward(speaker){
+  combinedLayout.style.display='none';
+  singleLayout.style.display='none';
+  awardOverline.textContent=speaker.awardOverline;
+  awardTitle.innerHTML='SELAMAT '+speaker.awardTitle;
+  awardSubtitle.textContent=speaker.awardSubtitle;
   switchPanel(bumperScreen);
   startBumper();
   tryAutoplay();
