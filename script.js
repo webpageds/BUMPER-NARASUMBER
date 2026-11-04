@@ -1,4 +1,4 @@
-const scenes=[...document.querySelectorAll('.scene')];
+const scenes=[...document.querySelectorAll('.scene:not(.scene-award)')];
 const progress=document.getElementById('progress');
 const photo=document.getElementById('speaker-photo');
 const placeholder=document.getElementById('photo-placeholder');
