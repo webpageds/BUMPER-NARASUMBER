@@ -30,6 +30,20 @@
  .certificate-art{max-width:69%}
 }
 </style>
+<style>
+.award-option{grid-column:1/-1;grid-template-columns:62px 1fr;grid-template-rows:auto 1fr auto;min-height:132px}
+.award-option .option-index{grid-column:1/-1}
+.award-symbol{grid-column:1;grid-row:2/4;align-self:center;width:48px;height:48px;border:1px solid #e7c77d99;border-radius:50%;display:grid;place-items:center;background:radial-gradient(circle,#e7c77d22,#e7c77d05);box-shadow:0 0 25px #e7c77d12}
+.award-symbol span{font-size:25px;color:#f3d99b;text-shadow:0 0 15px #e7c77d88}
+.award-option .option-copy{grid-column:2;grid-row:2}
+.award-option .option-copy strong{font-size:16px}
+.award-option .option-cta{grid-column:2;grid-row:3;margin-top:8px}
+@media(max-width:760px){
+ .award-option{grid-column:auto;grid-template-columns:48px 1fr;min-height:125px}
+ .award-symbol{width:39px;height:39px}
+ .award-option .option-copy strong{font-size:14px}
+}
+</style>
 </head>
 <body>
 <main class="stage" id="stage">
@@ -73,6 +87,18 @@
         <span class="option-photo"><img src="narsumirfan.png" alt="Foto Irfan Sulaiman Suhaeri"></span>
         <span class="option-copy"><strong>Sertif Narsum · Irfan</strong><small>Preview bumper narasumber dan sertifikat penghargaan.</small><small>Foto khusus sertifikat narasumber.</small></span>
         <span class="option-cta">PLAY PREVIEW <b>↗</b></span>
+      </button>
+      <button class="speaker-option award-option" type="button" data-speaker="4">
+        <span class="option-index">05 / WEBINAR AWARD</span>
+        <span class="award-symbol"><span>✦</span></span>
+        <span class="option-copy"><strong>Teraktif Bertanya</strong><small>Penghargaan peserta paling aktif mengajukan pertanyaan.</small><small>Interactive participant award · Q&amp;A session.</small></span>
+        <span class="option-cta">PLAY AWARD <b>↗</b></span>
+      </button>
+      <button class="speaker-option award-option" type="button" data-speaker="5">
+        <span class="option-index">06 / WEBINAR AWARD</span>
+        <span class="award-symbol"><span>✧</span></span>
+        <span class="option-copy"><strong>Teraktif Menjawab</strong><small>Penghargaan peserta paling aktif menjawab pertanyaan.</small><small>Interactive participant award · Answer session.</small></span>
+        <span class="option-cta">PLAY AWARD <b>↗</b></span>
       </button>
       <button class="speaker-option custom-option" type="button" id="open-custom">
         <span class="option-index">05 / BUILD YOUR OWN</span>
@@ -142,9 +168,9 @@
       <div class="arrival-ring"><span>✦</span></div><p class="scene-sub">ONE MOMENT. ONE INSPIRATION.</p>
     </section>
     <section class="scene scene-welcome" data-scene="2">
-      <div class="welcome-rays"></div><p class="micro-label">WITH GREAT HONOR</p>
-      <h2 class="welcome-title">SELAMAT <b>DATANG</b></h2>
-      <div class="welcome-line"><span></span><i>LET'S GIVE A WARM WELCOME</i><span></span></div>
+      <div class="welcome-rays"></div><p class="micro-label" id="award-overline">WITH GREAT HONOR</p>
+      <h2 class="welcome-title" id="award-title">SELAMAT <b>DATANG</b></h2>
+      <div class="welcome-line"><span></span><i id="award-subtitle">LET'S GIVE A WARM WELCOME</i><span></span></div>
       <div class="sparkle s1">✦</div><div class="sparkle s2">✧</div><div class="sparkle s3">✦</div>
     </section>
     <section class="scene scene-reveal" data-scene="3">
