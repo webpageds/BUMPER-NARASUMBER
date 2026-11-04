@@ -86,6 +86,18 @@ function showScene(index){
     void scene.offsetWidth;
     if(i===index)scene.classList.add('active');
   });
+  if(index===3 && combinedLayout.style.display==='grid'){
+    combinedLayout.querySelectorAll('.combined-speaker').forEach((card,i)=>{
+      card.style.animation='none';
+      card.style.opacity='0';
+      card.style.transform='translateY(42px)';
+      card.style.filter='blur(8px)';
+      void card.offsetWidth;
+      card.style.animation=i===0
+        ? 'photoReveal 1s .45s cubic-bezier(.16,1,.3,1) forwards'
+        : 'photoReveal 1s .7s cubic-bezier(.16,1,.3,1) forwards';
+    });
+  }
 }
 function animate(now){
   const elapsed=(now-cycleStart)%cycleLength;
@@ -196,12 +208,6 @@ function openCombined(){
   // Reset all reveal states before selecting the two-speaker layout.
   singleLayout.style.display='none';
   combinedLayout.style.display='grid';
-  combinedLayout.querySelectorAll('.combined-speaker').forEach(card=>{
-    card.style.animation='none';
-    card.style.opacity='0';
-    card.style.transform='translateY(42px)';
-    card.style.filter='blur(8px)';
-  });
   switchPanel(bumperScreen);
   startBumper();
   tryAutoplay();
