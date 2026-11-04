@@ -159,23 +159,21 @@ function openSpeaker(speaker){
 function openAward(speaker){
   combinedLayout.style.display='none';
   singleLayout.style.display='none';
+
+  // Set the three award lines and launch the dedicated award scene only.
   awardOverline.textContent='SELAMAT';
   awardTitle.innerHTML='KEPADA PESERTA<br>WEBINAR';
   awardSubtitle.textContent=speaker.awardSubtitle;
-  const welcomeScene=document.querySelector('.scene-welcome');
-  const awardScene=document.querySelector('.scene-award');
-  if(awardScene){
-    awardScene.classList.remove('active');
-    awardScene.setAttribute('aria-hidden','false');
-  }
+
   switchPanel(bumperScreen);
   cancelAnimationFrame(rafId);
+  activeIndex=-1;
   scenes.forEach(scene=>scene.classList.remove('active'));
+  const awardScene=document.querySelector('.scene-award');
   if(awardScene){
     void awardScene.offsetWidth;
     awardScene.classList.add('active');
   }
-  activeIndex=-1;
   progress.style.width='100%';
   tryAutoplay();
 }
