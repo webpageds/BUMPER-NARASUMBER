@@ -245,3 +245,9 @@
  .scene-award .welcome-line{gap:8px;width:100%}
  .scene-award .welcome-line i{font-size:clamp(9px,2.5vw,14px);letter-spacing:.1em}
 }
+/* Combined speaker reveal: keep the two speaker cards together in scene 4 only */
+.scene-reveal .combined-layout{z-index:2}
+.scene-reveal .combined-speaker{opacity:0;transform:translateY(42px);filter:blur(8px)}
+.scene-reveal.active .combined-speaker:first-child{animation:photoReveal 1s .45s cubic-bezier(.16,1,.3,1) forwards}
+.scene-reveal.active .combined-speaker:last-child{animation:photoReveal 1s .7s cubic-bezier(.16,1,.3,1) forwards}
+.scene-reveal .combined-photo-frame:after{pointer-events:none}
