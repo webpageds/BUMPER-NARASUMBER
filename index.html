@@ -3,6 +3,17 @@
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#070b16"><title>Speaker Bumper Studio</title><link rel="stylesheet" href="style.css">
+<style>
+.certificate-viewer{position:absolute;inset:0;z-index:11;display:none;align-items:center;justify-content:center;padding:7vh 5vw 5vh;background:radial-gradient(ellipse at center,#172844 0%,#070b16 78%);overflow:hidden}
+.certificate-viewer.active{display:flex}
+.certificate-viewer-tools{position:absolute;top:4.5%;left:50%;transform:translateX(-50%);display:flex;gap:22px;align-items:center;z-index:2;font-size:8px;font-weight:800;letter-spacing:.22em;color:#e7c77d;white-space:nowrap}
+.viewer-sound{color:#9eabc1}
+.certificate-art{display:block;max-width:min(88vw,1500px);max-height:86vh;width:auto;height:auto;object-fit:contain;filter:drop-shadow(0 24px 55px #0009);animation:certificatePop .85s cubic-bezier(.16,1,.3,1) both}
+.cert-viewer-back{z-index:3}
+.cert-audio-toggle{z-index:3}
+@keyframes certificatePop{from{opacity:0;transform:scale(.94) translateY(18px);filter:blur(7px) drop-shadow(0 24px 55px #0009)}to{opacity:1;transform:scale(1);filter:blur(0) drop-shadow(0 24px 55px #0009)}}
+@media(max-width:760px){.certificate-viewer{padding:13vh 3vw 5vh}.certificate-art{max-width:94vw;max-height:78vh}.certificate-viewer-tools{top:7.5%;font-size:6px;gap:12px}.cert-viewer-back{top:3%;left:4%}}
+</style>
 </head>
 <body>
 <main class="stage" id="stage">
@@ -56,6 +67,16 @@
     </div>
     <p class="selector-footnote">SELECT A SPEAKER · PREVIEW THE ANIMATION · PLAY THE SOUND</p>
   </section>
+
+    <div class="certificate-viewer" id="certificate-viewer" aria-hidden="true">
+      <button class="back-button cert-viewer-back" id="cert-viewer-back" type="button">← <span>KEMBALI KE MENU</span></button>
+      <div class="certificate-viewer-tools">
+        <span class="viewer-label">✦ CERTIFICATE PRESENTATION</span>
+        <span class="viewer-sound" id="viewer-sound-label">SOUND OFF</span>
+      </div>
+      <img class="certificate-art" id="certificate-art" src="narsumriyan.png" alt="Sertifikat narasumber">
+      <button class="audio-toggle cert-audio-toggle" id="cert-audio-toggle" type="button" aria-label="Aktifkan suara">♫</button>
+    </div>
 
   <section class="custom-screen" id="custom-screen" aria-hidden="true">
     <button class="back-button custom-back" id="custom-back" type="button">← <span>KEMBALI KE MENU</span></button>
