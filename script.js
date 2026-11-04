@@ -193,9 +193,15 @@ function syncCertificateSound(){
   certificateAudioButton.setAttribute('aria-label',playing?'Matikan suara':'Aktifkan suara');
 }
 function openCombined(){
+  // Reset all reveal states before selecting the two-speaker layout.
   singleLayout.style.display='none';
   combinedLayout.style.display='grid';
-  // Use the exact same four-scene bumper sequence as a single speaker.
+  combinedLayout.querySelectorAll('.combined-speaker').forEach(card=>{
+    card.style.animation='none';
+    card.style.opacity='0';
+    card.style.transform='translateY(42px)';
+    card.style.filter='blur(8px)';
+  });
   switchPanel(bumperScreen);
   startBumper();
   tryAutoplay();
