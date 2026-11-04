@@ -61,16 +61,16 @@ const speakers=[
   {
     award:true,
     awardType:'question',
-    awardTitle:'TERAKTIF <b>BERTANYA</b>',
-    awardOverline:'PENGHARGAAN PESERTA WEBINAR',
-    awardSubtitle:'PESERTA TERAKTIF DALAM MENGAJUKAN PERTANYAAN'
+    awardTitle:'KEPADA PESERTA WEBINAR',
+    awardOverline:'SELAMAT',
+    awardSubtitle:'SEBAGAI PESERTA TERAKTIF BERTANYA'
   },
   {
     award:true,
     awardType:'answer',
-    awardTitle:'TERAKTIF <b>MENJAWAB</b>',
-    awardOverline:'PENGHARGAAN PESERTA WEBINAR',
-    awardSubtitle:'PESERTA TERAKTIF DALAM MENJAWAB PERTANYAAN'
+    awardTitle:'KEPADA PESERTA WEBINAR',
+    awardOverline:'SELAMAT',
+    awardSubtitle:'SEBAGAI PESERTA TERAKTIF MENJAWAB'
   }
 ];
 
@@ -160,7 +160,7 @@ function openAward(speaker){
   combinedLayout.style.display='none';
   singleLayout.style.display='none';
   awardOverline.textContent=speaker.awardOverline;
-  awardTitle.innerHTML='SELAMAT '+speaker.awardTitle;
+  awardTitle.innerHTML=speaker.awardTitle;
   awardSubtitle.textContent=speaker.awardSubtitle;
   switchPanel(bumperScreen);
   startBumper();
