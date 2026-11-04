@@ -195,6 +195,7 @@ function syncCertificateSound(){
 function openCombined(){
   singleLayout.style.display='none';
   combinedLayout.style.display='grid';
+  // Use the exact same four-scene bumper sequence as a single speaker.
   switchPanel(bumperScreen);
   startBumper();
   tryAutoplay();
