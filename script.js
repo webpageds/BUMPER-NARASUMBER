@@ -159,6 +159,8 @@ function openSpeaker(speaker){
     openCertificate(speaker);
     return;
   }
+  const awardScene=document.querySelector('.scene-award');
+  if(awardScene)awardScene.classList.remove('active');
   combinedLayout.style.display='none';
   singleLayout.style.display='flex';
   speakerName.innerHTML=speaker.name;
@@ -205,9 +207,23 @@ function syncCertificateSound(){
   certificateAudioButton.setAttribute('aria-label',playing?'Matikan suara':'Aktifkan suara');
 }
 function openCombined(){
-  // Reset all reveal states before selecting the two-speaker layout.
+  // Clear the separate participant-award scene so it cannot cover the speaker reveal.
+  const awardScene=document.querySelector('.scene-award');
+  if(awardScene){
+    awardScene.classList.remove('active');
+    awardScene.setAttribute('aria-hidden','true');
+  }
+
+  // Select only the two-speaker identity layout for the final reveal scene.
   singleLayout.style.display='none';
   combinedLayout.style.display='grid';
+  combinedLayout.querySelectorAll('.combined-speaker').forEach(card=>{
+    card.style.animation='none';
+    card.style.opacity='0';
+    card.style.transform='translateY(42px)';
+    card.style.filter='blur(8px)';
+  });
+
   switchPanel(bumperScreen);
   startBumper();
   tryAutoplay();
