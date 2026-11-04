@@ -226,3 +226,22 @@
  .award-symbol{width:39px;height:39px}
  .award-option .option-copy strong{font-size:14px}
 }
+
+/* Dedicated three-line active participant award scene */
+.scene-award{inset:10% 5% 9%;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;gap:clamp(18px,3.5vh,34px)}
+.scene-award .micro-label{font-size:clamp(15px,2vw,24px);letter-spacing:.38em;color:var(--gold);font-weight:800;margin:0;opacity:0;transform:translateY(24px);filter:blur(6px)}
+.scene-award .welcome-title{font-size:clamp(36px,6.2vw,82px);line-height:1.12;letter-spacing:-.04em;margin:0;opacity:0;transform:translateY(35px) scale(.97);filter:blur(8px);text-shadow:0 8px 40px #0009}
+.scene-award .welcome-line{display:flex;align-items:center;gap:18px;width:min(90%,760px);opacity:0;transform:translateY(25px);filter:blur(6px)}
+.scene-award .welcome-line i{font-size:clamp(12px,1.6vw,20px);line-height:1.5;letter-spacing:.2em;color:#f3d99b;font-style:normal;font-weight:800}
+.scene-award.active .micro-label{animation:awardLineReveal .9s .15s cubic-bezier(.16,1,.3,1) forwards}
+.scene-award.active .welcome-title{animation:awardLineReveal 1.05s .85s cubic-bezier(.16,1,.3,1) forwards}
+.scene-award.active .welcome-line{animation:awardLineReveal .95s 1.65s cubic-bezier(.16,1,.3,1) forwards}
+.scene-award.active .sparkle{animation:sparkleFloat 2.5s ease-in-out infinite}
+@keyframes awardLineReveal{to{opacity:1;transform:translateY(0) scale(1);filter:blur(0)}}
+@media(max-width:760px){
+ .scene-award{inset:12% 5% 10%;gap:clamp(20px,4vh,34px)}
+ .scene-award .micro-label{font-size:clamp(10px,3vw,15px);letter-spacing:.25em}
+ .scene-award .welcome-title{font-size:clamp(32px,9vw,55px)}
+ .scene-award .welcome-line{gap:8px;width:100%}
+ .scene-award .welcome-line i{font-size:clamp(9px,2.5vw,14px);letter-spacing:.1em}
+}
