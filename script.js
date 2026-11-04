@@ -9,6 +9,10 @@ const soundUi=document.querySelector('.sound-ui');
 const selector=document.getElementById('selector-screen');
 const customScreen=document.getElementById('custom-screen');
 const bumperScreen=document.getElementById('bumper-screen');
+const certificateViewer=document.getElementById('certificate-viewer');
+const certificateArt=document.getElementById('certificate-art');
+const certificateSoundLabel=document.getElementById('viewer-sound-label');
+const certificateAudioButton=document.getElementById('cert-audio-toggle');
 const speakerName=document.getElementById('speaker-name');
 const speakerRole=document.getElementById('speaker-role');
 const combinedLayout=document.getElementById('combined-layout');
@@ -31,16 +35,20 @@ const speakers=[
     alt:'Foto Irfan Sulaiman Suhaeri'
   },
   {
-    name:'Dr. Riyan Harbi<br>Valdiansyah',
-    role:'S.E., M.Ak., Cert DA<br>CEO &amp; Founder — Fast Consulting',
+    name:'Sertifikat Narasumber',
+    role:'Dr. Riyan Harbi Valdiansyah',
     photo:'narsumriyan.png',
-    alt:'Foto sertifikat Dr. Riyan Harbi Valdiansyah'
+    alt:'Sertifikat narasumber Dr. Riyan Harbi Valdiansyah',
+    certificate:true,
+    certificateAlt:'Sertifikat narasumber Dr. Riyan Harbi Valdiansyah'
   },
   {
-    name:'Irfan Sulaiman<br>Suhaeri',
-    role:'S.E., CA, CPA., CPSAK., CSA., ASEAN CPA., GARP SCR, IFRS FSA., ProDipSust., ACCA<br>Associate Director — KPMG Siddharta Advisory Indonesia',
+    name:'Sertifikat Narasumber',
+    role:'Irfan Sulaiman Suhaeri',
     photo:'narsumirfan.png',
-    alt:'Foto sertifikat Irfan Sulaiman Suhaeri'
+    alt:'Sertifikat narasumber Irfan Sulaiman Suhaeri',
+    certificate:true,
+    certificateAlt:'Sertifikat narasumber Irfan Sulaiman Suhaeri'
   }
 ];
 
@@ -100,7 +108,7 @@ async function tryAutoplay(){
   }
 }
 function switchPanel(panel){
-  [selector,customScreen,bumperScreen].forEach(el=>{
+  [selector,customScreen,bumperScreen,certificateViewer].forEach(el=>{
     el.classList.remove('active');
     el.setAttribute('aria-hidden','true');
   });
@@ -109,6 +117,10 @@ function switchPanel(panel){
 }
 function openSpeaker(speaker){
   if(!speaker)return;
+  if(speaker.certificate){
+    openCertificate(speaker);
+    return;
+  }
   combinedLayout.style.display='none';
   singleLayout.style.display='flex';
   speakerName.innerHTML=speaker.name;
@@ -117,6 +129,19 @@ function openSpeaker(speaker){
   switchPanel(bumperScreen);
   startBumper();
   tryAutoplay();
+}
+function openCertificate(speaker){
+  cancelAnimationFrame(rafId);
+  audio.volume=1;
+  certificateArt.src=speaker.photo;
+  certificateArt.alt=speaker.certificateAlt||'Sertifikat narasumber';
+  switchPanel(certificateViewer);
+  tryAutoplay().then(()=>syncCertificateSound());
+}
+function syncCertificateSound(){
+  const playing=!audio.paused;
+  certificateSoundLabel.textContent=playing?'SOUND ON':'SOUND OFF';
+  certificateAudioButton.setAttribute('aria-label',playing?'Matikan suara':'Aktifkan suara');
 }
 function openCombined(){
   singleLayout.style.display='none';
@@ -159,6 +184,14 @@ document.querySelectorAll('[data-speaker]').forEach(button=>{
   button.addEventListener('click',()=>openSpeaker(speakers[Number(button.dataset.speaker)]));
 });
 document.getElementById('back-button').addEventListener('click',returnToMenu);
+document.getElementById('cert-viewer-back').addEventListener('click',returnToMenu);
+certificateAudioButton.addEventListener('click',async()=>{
+  try{
+    if(audio.paused){await audio.play();}
+    else{audio.pause();}
+    syncCertificateSound();
+  }catch(error){certificateSoundLabel.textContent='SOUND GAGAL DIPUTAR';}
+});
 document.getElementById('play-combined').addEventListener('click',openCombined);
 document.getElementById('open-custom').addEventListener('click',()=>switchPanel(customScreen));
 document.getElementById('custom-back').addEventListener('click',()=>switchPanel(selector));
@@ -196,8 +229,8 @@ customForm.addEventListener('submit',event=>{
   openSpeaker(speaker);
 });
 
-audio.addEventListener('play',()=>setSoundState(true));
-audio.addEventListener('pause',()=>setSoundState(false));
+audio.addEventListener('play',()=>{setSoundState(true);if(certificateViewer.classList.contains('active'))syncCertificateSound();});
+audio.addEventListener('pause',()=>{setSoundState(false);if(certificateViewer.classList.contains('active'))syncCertificateSound();});
 audio.addEventListener('error',()=>{
   soundLabel.textContent='AUDIO TIDAK DAPAT DIMUAT';
   soundUi.classList.remove('playing');
