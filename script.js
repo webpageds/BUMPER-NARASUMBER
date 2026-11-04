@@ -159,29 +159,23 @@ function openSpeaker(speaker){
 function openAward(speaker){
   combinedLayout.style.display='none';
   singleLayout.style.display='none';
-  awardOverline.textContent=speaker.awardOverline;
-  awardTitle.textContent='SELAMAT';
-  awardSubtitle.textContent='';
-  awardTitle.innerHTML='SELAMAT';
+  awardOverline.textContent='SELAMAT';
+  awardTitle.innerHTML='KEPADA PESERTA<br>WEBINAR';
+  awardSubtitle.textContent=speaker.awardSubtitle;
+  const welcomeScene=document.querySelector('.scene-welcome');
+  const awardScene=document.querySelector('.scene-award');
+  if(awardScene){
+    awardScene.classList.remove('active');
+    awardScene.setAttribute('aria-hidden','false');
+  }
   switchPanel(bumperScreen);
   cancelAnimationFrame(rafId);
+  scenes.forEach(scene=>scene.classList.remove('active'));
+  if(awardScene){
+    void awardScene.offsetWidth;
+    awardScene.classList.add('active');
+  }
   activeIndex=-1;
-  const awardScene=document.querySelector('.scene-welcome');
-  const awardScenes=[...scenes];
-  awardScenes.forEach(scene=>scene.classList.remove('active'));
-  void awardScene.offsetWidth;
-  awardScene.classList.add('active');
-  awardTitle.textContent='SELAMAT';
-  awardSubtitle.textContent='KEPADA PESERTA WEBINAR';
-  // The last line is set after the welcome scene has entered, with a staggered reveal.
-  const questionOrAnswer=speaker.awardSubtitle;
-  const subtitleLine=awardSubtitle;
-  subtitleLine.textContent='KEPADA PESERTA WEBINAR';
-  subtitleLine.classList.remove('award-line-two');
-  requestAnimationFrame(()=>{
-    subtitleLine.classList.add('award-line-two');
-    subtitleLine.textContent=questionOrAnswer;
-  });
   progress.style.width='100%';
   tryAutoplay();
 }
