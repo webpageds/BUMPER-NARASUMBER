@@ -211,3 +211,18 @@
  .bumper-screen .scene-reveal{inset:10% 4% 8%}
  .reveal-overline{top:0}
 }
+
+
+/* AWARD / MOST ACTIVE PARTICIPANT PRESETS */
+.award-option{grid-column:1/-1;grid-template-columns:62px 1fr;grid-template-rows:auto 1fr auto;min-height:132px}
+.award-option .option-index{grid-column:1/-1}
+.award-symbol{grid-column:1;grid-row:2/4;align-self:center;width:48px;height:48px;border:1px solid #e7c77d99;border-radius:50%;display:grid;place-items:center;background:radial-gradient(circle,#e7c77d22,#e7c77d05);box-shadow:0 0 25px #e7c77d12}
+.award-symbol span{font-size:25px;color:#f3d99b;text-shadow:0 0 15px #e7c77d88}
+.award-option .option-copy{grid-column:2;grid-row:2}
+.award-option .option-copy strong{font-size:16px}
+.award-option .option-cta{grid-column:2;grid-row:3;margin-top:8px}
+@media(max-width:760px){
+ .award-option{grid-column:auto;grid-template-columns:48px 1fr;min-height:125px}
+ .award-symbol{width:39px;height:39px}
+ .award-option .option-copy strong{font-size:14px}
+}
