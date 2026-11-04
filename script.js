@@ -29,6 +29,18 @@ const speakers=[
     role:'S.E., CA, CPA., CPSAK., CSA., ASEAN CPA., GARP SCR, IFRS FSA., ProDipSust., ACCA<br>Associate Director — KPMG Siddharta Advisory Indonesia',
     photo:'narsum2.png',
     alt:'Foto Irfan Sulaiman Suhaeri'
+  },
+  {
+    name:'Dr. Riyan Harbi<br>Valdiansyah',
+    role:'S.E., M.Ak., Cert DA<br>CEO &amp; Founder — Fast Consulting',
+    photo:'narsumriyan.png',
+    alt:'Foto sertifikat Dr. Riyan Harbi Valdiansyah'
+  },
+  {
+    name:'Irfan Sulaiman<br>Suhaeri',
+    role:'S.E., CA, CPA., CPSAK., CSA., ASEAN CPA., GARP SCR, IFRS FSA., ProDipSust., ACCA<br>Associate Director — KPMG Siddharta Advisory Indonesia',
+    photo:'narsumirfan.png',
+    alt:'Foto sertifikat Irfan Sulaiman Suhaeri'
   }
 ];
 
