@@ -160,10 +160,29 @@ function openAward(speaker){
   combinedLayout.style.display='none';
   singleLayout.style.display='none';
   awardOverline.textContent=speaker.awardOverline;
-  awardTitle.innerHTML=speaker.awardTitle;
-  awardSubtitle.textContent=speaker.awardSubtitle;
+  awardTitle.textContent='SELAMAT';
+  awardSubtitle.textContent='';
+  awardTitle.innerHTML='SELAMAT';
   switchPanel(bumperScreen);
-  startBumper();
+  cancelAnimationFrame(rafId);
+  activeIndex=-1;
+  const awardScene=document.querySelector('.scene-welcome');
+  const awardScenes=[...scenes];
+  awardScenes.forEach(scene=>scene.classList.remove('active'));
+  void awardScene.offsetWidth;
+  awardScene.classList.add('active');
+  awardTitle.textContent='SELAMAT';
+  awardSubtitle.textContent='KEPADA PESERTA WEBINAR';
+  // The last line is set after the welcome scene has entered, with a staggered reveal.
+  const questionOrAnswer=speaker.awardSubtitle;
+  const subtitleLine=awardSubtitle;
+  subtitleLine.textContent='KEPADA PESERTA WEBINAR';
+  subtitleLine.classList.remove('award-line-two');
+  requestAnimationFrame(()=>{
+    subtitleLine.classList.add('award-line-two');
+    subtitleLine.textContent=questionOrAnswer;
+  });
+  progress.style.width='100%';
   tryAutoplay();
 }
 function openCertificate(speaker){
