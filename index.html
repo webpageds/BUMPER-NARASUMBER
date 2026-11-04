@@ -8,11 +8,27 @@
 .certificate-viewer.active{display:flex}
 .certificate-viewer-tools{position:absolute;top:4.5%;left:50%;transform:translateX(-50%);display:flex;gap:22px;align-items:center;z-index:2;font-size:8px;font-weight:800;letter-spacing:.22em;color:#e7c77d;white-space:nowrap}
 .viewer-sound{color:#9eabc1}
-.certificate-art{display:block;max-width:min(88vw,1500px);max-height:86vh;width:auto;height:auto;object-fit:contain;filter:drop-shadow(0 24px 55px #0009);animation:certificatePop .85s cubic-bezier(.16,1,.3,1) both}
+.certificate-presentation{display:flex;align-items:center;justify-content:center;gap:clamp(18px,3vw,48px);width:100%;max-width:1500px;max-height:86vh;animation:certificatePop .85s cubic-bezier(.16,1,.3,1) both}
+.certificate-art{display:block;flex:1 1 72%;min-width:0;max-width:78%;max-height:84vh;width:auto;height:auto;object-fit:contain;filter:drop-shadow(0 24px 55px #0009)}
+.certificate-speaker-photo-wrap{flex:0 1 22%;width:22%;max-width:285px;max-height:68vh;aspect-ratio:3/4;display:flex;align-items:center;justify-content:center;position:relative;padding:7px;border:1px solid #d9bd7c;background:linear-gradient(145deg,#e6c982,#17243c 42%,#0c1425);box-shadow:0 22px 55px #0009,0 0 28px #e7c77d22}
+.certificate-speaker-photo{display:block;width:100%;height:100%;max-height:calc(68vh - 14px);object-fit:cover;object-position:center top}
+
 .cert-viewer-back{z-index:3}
 .cert-audio-toggle{z-index:3}
 @keyframes certificatePop{from{opacity:0;transform:scale(.94) translateY(18px);filter:blur(7px) drop-shadow(0 24px 55px #0009)}to{opacity:1;transform:scale(1);filter:blur(0) drop-shadow(0 24px 55px #0009)}}
-@media(max-width:760px){.certificate-viewer{padding:13vh 3vw 5vh}.certificate-art{max-width:94vw;max-height:78vh}.certificate-viewer-tools{top:7.5%;font-size:6px;gap:12px}.cert-viewer-back{top:3%;left:4%}}
+@media(max-width:760px){
+ .certificate-viewer{padding:15vh 3vw 6vh}
+ .certificate-presentation{gap:10px;max-height:78vh}
+ .certificate-art{flex:1 1 70%;max-width:72%;max-height:76vh}
+ .certificate-speaker-photo-wrap{flex:0 1 27%;width:27%;max-width:170px;max-height:54vh;padding:4px}
+ .certificate-speaker-photo{max-height:calc(54vh - 8px)}
+ .certificate-viewer-tools{top:7.5%;font-size:6px;gap:12px}.cert-viewer-back{top:3%;left:4%}
+}
+@media(max-width:420px){
+ .certificate-presentation{gap:7px}
+ .certificate-speaker-photo-wrap{flex-basis:29%;width:29%;padding:3px}
+ .certificate-art{max-width:69%}
+}
 </style>
 </head>
 <body>
@@ -74,7 +90,12 @@
         <span class="viewer-label">✦ CERTIFICATE PRESENTATION</span>
         <span class="viewer-sound" id="viewer-sound-label">SOUND OFF</span>
       </div>
-      <img class="certificate-art" id="certificate-art" src="narsumriyan.png" alt="Sertifikat narasumber">
+      <div class="certificate-presentation" id="certificate-presentation">
+        <img class="certificate-art" id="certificate-art" src="narsumriyan.png" alt="Sertifikat narasumber">
+        <div class="certificate-speaker-photo-wrap">
+          <img class="certificate-speaker-photo" id="certificate-speaker-photo" src="fotonarsum.png" alt="Foto narasumber">
+        </div>
+      </div>
       <button class="audio-toggle cert-audio-toggle" id="cert-audio-toggle" type="button" aria-label="Aktifkan suara">♫</button>
     </div>
 
