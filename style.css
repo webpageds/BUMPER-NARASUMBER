@@ -309,3 +309,46 @@
     text-align:center;
   }
 }
+
+
+/* Participant award alignment: keep the qualifier text centered with the main heading. */
+.scene-award .welcome-line{
+  width:100% !important;
+  max-width:100% !important;
+  justify-content:center !important;
+  text-align:center !important;
+  margin-left:auto !important;
+  margin-right:auto !important;
+  gap:16px !important;
+}
+.scene-award .welcome-line i{
+  display:block !important;
+  flex:none !important;
+  width:max-content !important;
+  max-width:calc(100% - 116px) !important;
+  text-align:center !important;
+  white-space:normal !important;
+}
+.scene-award .welcome-line span{
+  display:block !important;
+  flex:none !important;
+  width:42px !important;
+  min-width:42px !important;
+  max-width:42px !important;
+}
+@media(max-width:760px){
+  .scene-award .welcome-line{
+    width:100% !important;
+    max-width:100% !important;
+    gap:8px !important;
+  }
+  .scene-award .welcome-line i{
+    max-width:calc(100% - 48px) !important;
+    width:auto !important;
+  }
+  .scene-award .welcome-line span{
+    width:20px !important;
+    min-width:20px !important;
+    max-width:20px !important;
+  }
+}
